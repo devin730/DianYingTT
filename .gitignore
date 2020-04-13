@@ -1,0 +1,5 @@
+*.xls
+*.db
+*.html
+__pacache/
+.vscode/
