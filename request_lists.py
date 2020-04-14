@@ -6,9 +6,7 @@ import time
 import random
 from lxml import etree
 import xlwt
-from MovieHeaven import SunshineMovie
-from MPage import SearchLinks
-import sqlite3
+from movie_page import SearchLinks
 
 class MovieLists():
     def __init__(self, url, save_filename):
@@ -17,7 +15,7 @@ class MovieLists():
             'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0',
             'Connection': 'keep - alive'
         }
-        self.url_start = url  # "https://www.dytt8.net/html/gndy/jddy/20160320/50523.html"
+        self.url_start = url
         self.file_name = save_filename
         self.movie_name = ''
         self.movie_down_links = []
@@ -49,12 +47,6 @@ class MovieLists():
         self.worksheet.col(2).width = 256 * 150
         self.worksheet.col(3).width = 256 * 150
         self.worksheet.col(4).width = 256 * 150
-        # self.worksheet.col(5).width = 256 * 20
-        # self.worksheet.col(6).width = 256 * 20
-        # self.worksheet.col(7).width = 256 * 20
-        # self.worksheet.col(8).width = 256 * 20
-        # self.worksheet.col(9).width = 256 * 30
-        # self.worksheet.col(10).width = 256 * 100
 
         # 设置标题栏
         self.worksheet.write(0, 0, label='电影名称', style=self.style023)
@@ -62,16 +54,8 @@ class MovieLists():
         self.worksheet.write(0, 2, label='下载链接1', style=self.style023)
         self.worksheet.write(0, 3, label='下载链接2', style=self.style023)
         self.worksheet.write(0, 4, label='下载链接3', style=self.common_style)
-
         self.write_line = 0
-        # self.worksheet.write(0, 5, label='明星', style=self.common_style)
-        # self.worksheet.write(0, 6, label='国家', style=self.common_style)
-        # self.worksheet.write(0, 7, label='类型', style=self.common_style)
-        # self.worksheet.write(0, 8, label='评论数', style=self.common_style)
-        # self.worksheet.write(0, 9, label='短评', style=self.common_style)
-        # self.worksheet.write(0, 10, label='网址', style=self.common_style)
         self.BeginCrawl(self.url_start)
-        # self.workbook.save(self.file_name)
 
     def EncodeData(self, req):
         if req.encoding == 'ISO-8859-1':
@@ -135,6 +119,7 @@ class MovieLists():
         self.movie_down_links = []
         self.workbook.save(self.file_name)
         self.movies_dict = {'title': '', 'url': '', 'downloadlink': '', 'id': ''}
+        time.sleep(1+random.random())
         return
    
     def GetMovieName(self, label):

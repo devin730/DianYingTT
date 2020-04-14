@@ -1,4 +1,4 @@
-from RequestMain import MainMovie
+from request_lists import MovieLists
 
 url_lists = ['https://www.dytt8.net/html/gndy/jddy/20160320/50523.html',
              'https://www.dytt8.net/html/gndy/jddy/20160320/50523_2.html',
@@ -7,5 +7,5 @@ url_lists = ['https://www.dytt8.net/html/gndy/jddy/20160320/50523.html',
 
 for index, list in enumerate(url_lists):
     print(list)
-    filename = '资源'+str(index)+'.xls'
-    MainMovie(url=list, save_filename=filename)
+    filename = './generate/page'+str(index)+'.xls'
+    MovieLists(url=list, save_filename=filename)
